@@ -1,10 +1,10 @@
 #!/bin/bash
 
 TMP_FOLDER=$(mktemp -d)
-CONFIG_FILE='SQRcoincoin.conf'
-CONFIGFOLDER='/root/.SQRcoincoin'
-COIN_DAEMON='SQRcoincoind'
-COIN_CLI='SQRcoincoind'
+CONFIG_FILE='SQRcoin.conf'
+CONFIGFOLDER='/root/.SQRcoin'
+COIN_DAEMON='SQRcoind'
+COIN_CLI='SQRcoind'
 COIN_PATH='/usr/local/bin/'
 COIN_TGZ='https://github.com/zoldur/SQRcoin/releases/download/v1.0.0.0/SQRcoind.tar.gz'
 COIN_ZIP=$(echo $COIN_TGZ | awk -F'/' '{print $NF}')
@@ -23,9 +23,8 @@ function download_node() {
   echo -e "Prepare to download $COIN_NAME binaries"
   cd $TMP_FOLDER
   wget -q $COIN_TGZ
-  tar xvzf $COIN_ZIP >/dev/null 2>&1
+  tar xvzf $COIN_ZIP -C $COIN_PATH >/dev/null 2>&1
   compile_error
-  cp $COIN_DAEMON $COIN_PATH
   chmod +x $COIN_PATH$COIN_DAEMON 
   cd - >/dev/null 2>&1
   rm -r $TMP_FOLDER >/dev/null 2>&1
